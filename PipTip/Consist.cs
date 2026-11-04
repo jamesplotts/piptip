@@ -36,8 +36,9 @@ namespace PipTip
             return EndFacing(car, neighbor, out _);
         }
 
-        // For an engine (or a steam engine's tender): the couplings between the engine/tender
-        // pair and the cars on either side. Another engine is left coupled, so an MU lash-up stays together.
+        // For an engine (or a steam engine's tender): the coupling between the engine/tender pair
+        // and its cars. Empty when there are cars on both sides, since then it isn't clear which
+        // to drop. Another engine is left coupled, so an MU lash-up stays together.
         public static List<(Car car, Car neighbor)> CarsCoupledToEngine(Car car)
         {
             List<(Car, Car)> cuts = new List<(Car, Car)>();
@@ -53,6 +54,8 @@ namespace PipTip
                         cuts.Add((unit, other));
                 }
             }
+            if (cuts.Count > 1)
+                cuts.Clear();
             return cuts;
         }
 
