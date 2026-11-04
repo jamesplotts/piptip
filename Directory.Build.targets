@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <PackFile Include="$(OutDir)$(AssemblyName).dll;$(OutDir)0Harmony.dll;$(OutDir)Info.json" />
-    <PackFile Include="$(MSBuildThisFileDirectory)README.md;$(MSBuildThisFileDirectory)LICENSE" />
+    <PackFile Include="$(MSBuildThisFileDirectory)README.md;$(MSBuildThisFileDirectory)LICENSE;$(MSBuildThisFileDirectory)LICENSE-Harmony.txt" />
   </ItemGroup>
 
   <!-- Debug: copy the mod into the game's ModDev folder. -->

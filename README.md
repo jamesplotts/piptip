@@ -39,4 +39,4 @@ Debug builds go to `Documents\Railroader\ModDev\PipTip`, which the game loads as
 
 ## License
 
-MIT. Harmony (`0Harmony.dll`) is MIT-licensed, by Andreas Pardeike.
+MIT. Harmony (`0Harmony.dll`) is MIT-licensed, by Andreas Pardeike; its license is in `LICENSE-Harmony.txt`.
