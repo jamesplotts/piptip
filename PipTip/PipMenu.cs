@@ -36,8 +36,12 @@ namespace PipTip
             if (engineCuts.Count > 0)
                 menu.AddButton(ContextMenuQuadrant.Unused2, "Disconnect Cars from Engine", () =>
                 {
+                    // Set the handbrake on the first car of each cut so the cars stay put.
                     foreach ((Car unit, Car other) in engineCuts)
+                    {
+                        other.SetHandbrake(true);
                         Consist.Disconnect(unit, other);
+                    }
                 });
 
             menu.Show(car.DisplayName);
