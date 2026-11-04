@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>PipTip</AssemblyName>
+    <RootNamespace>PipTip</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <GameAssembly Include="Railroader.Modding" />
+    <GameAssembly Include="Railroader" />
+    <GameAssembly Include="Core" />
+    <GameAssembly Include="KeyValue.Runtime" />
+    <GameAssembly Include="UnityEngine" />
+    <GameAssembly Include="UnityEngine.CoreModule" />
+    <GameAssembly Include="UnityEngine.UI" />
+    <GameAssembly Include="UnityEngine.UIModule" />
+    <GameAssembly Include="UnityEngine.InputLegacyModule" />
+    <GameAssembly Include="UnityEngine.TextRenderingModule" />
+    <GameAssembly Include="Unity.TextMeshPro" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 0Harmony.dll ships beside PipTip.dll; it is not listed in Info.json. -->
+    <PackageReference Include="Lib.Harmony" Version="2.4.3" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

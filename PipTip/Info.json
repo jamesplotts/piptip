@@ -1,0 +1,11 @@
+{
+  "identifier": "jamesplotts/piptip",
+  "version": "__VERSION__",
+  "name": "PipTip",
+  "author": "jamesplotts",
+  "description": "Hover a car pip in the selected train's strip for its load, fuel, condition and wheel oil. Right-click a pip for Inspect, Select, Bleed, Handbrake and Disconnect from Train.",
+  "assemblies": ["PipTip.dll"],
+  "dependencies": {
+    "required": ["rr/game >=0.6.0"]
+  }
+}
