@@ -9,7 +9,7 @@ A Railroader mod for the 0.6 "Maintenance of Way" built-in mod loader. It works 
   - its handbrake, hotbox and derailed warnings.
 
   Hovering an engine or its tender shows the pair together: the engine's info, the coal and water (or fuel), and the condition and oil of both cars.
-- **Right-click a pip** to open the game's own car menu: Inspect, Select/Deselect, Bleed, and Apply/Release Handbrake. The menu adds one more item, **Disconnect from Train**, which uncouples the car from its neighbor on the engine side. It closes both angle cocks first, the same as holding the game's smart-air modifier while you click a coupler, so the train doesn't go into emergency. An engine, or a steam engine's own tender, doesn't get this item.
+- **Right-click a pip** to open the game's own car menu: Inspect, Select/Deselect, Bleed, and Apply/Release Handbrake. The menu adds one more item, **Disconnect from Train**, which uncouples the car from its neighbor on the engine side. It closes both angle cocks first, the same as holding the game's smart-air modifier while you click a coupler, so the train doesn't go into emergency. An engine, or a steam engine's own tender, gets **Disconnect Cars from Engine** in its place. It uncouples the cars on both sides of the engine and tender, the same way, but leaves other engines coupled so an MU lash-up stays together.
 
 ## Install
 

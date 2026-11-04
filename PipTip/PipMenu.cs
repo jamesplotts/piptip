@@ -32,6 +32,13 @@ namespace PipTip
             });
             if (Consist.TryGetEngineSideNeighbor(cars, index, out Car neighbor))
                 menu.AddButton(ContextMenuQuadrant.Unused2, "Disconnect from Train", () => Consist.Disconnect(car, neighbor));
+            List<(Car car, Car neighbor)> engineCuts = Consist.CarsCoupledToEngine(car);
+            if (engineCuts.Count > 0)
+                menu.AddButton(ContextMenuQuadrant.Unused2, "Disconnect Cars from Engine", () =>
+                {
+                    foreach ((Car unit, Car other) in engineCuts)
+                        Consist.Disconnect(unit, other);
+                });
 
             menu.Show(car.DisplayName);
         }

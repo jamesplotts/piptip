@@ -36,6 +36,26 @@ namespace PipTip
             return EndFacing(car, neighbor, out _);
         }
 
+        // For an engine (or a steam engine's tender): the couplings between the engine/tender
+        // pair and the cars on either side. Another engine is left coupled, so an MU lash-up stays together.
+        public static List<(Car car, Car neighbor)> CarsCoupledToEngine(Car car)
+        {
+            List<(Car, Car)> cuts = new List<(Car, Car)>();
+            Car partner = Partner(car);
+            if (!car.IsLocomotive && !(partner != null && partner.IsLocomotive))
+                return cuts;
+            foreach (Car unit in partner != null ? new[] { car, partner } : new[] { car })
+            {
+                foreach (Car.LogicalEnd end in new[] { Car.LogicalEnd.A, Car.LogicalEnd.B })
+                {
+                    Car other = unit.CoupledTo(end);
+                    if (other != null && other != car && other != partner && !other.IsLocomotive)
+                        cuts.Add((unit, other));
+                }
+            }
+            return cuts;
+        }
+
         // Pull the cut lever between the two cars, closing both angle cocks first so neither
         // side dumps its air (as the game does with the smart-air modifier held).
         public static void Disconnect(Car car, Car neighbor)
