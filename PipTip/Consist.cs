@@ -37,8 +37,8 @@ namespace PipTip
         }
 
         // For an engine (or a steam engine's tender): the coupling between the engine/tender pair
-        // and its cars. Empty when there are cars on both sides, since then it isn't clear which
-        // to drop. Another engine is left coupled, so an MU lash-up stays together.
+        // and its cars. Empty when there are cars on both sides: cut loose
+        // between two parked strings, the engine has nowhere to go. Another engine is left coupled, so an MU lash-up stays together.
         public static List<(Car car, Car neighbor)> CarsCoupledToEngine(Car car)
         {
             List<(Car, Car)> cuts = new List<(Car, Car)>();
