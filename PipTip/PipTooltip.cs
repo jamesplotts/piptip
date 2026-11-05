@@ -158,23 +158,49 @@ namespace PipTip
             Place();
         }
 
-        // Above and right of the mouse (the strip is at the bottom of the screen), kept on screen.
+        // Left edge just above the mouse (the strip is at the bottom of the screen), kept on screen.
+        // The tag callout's visible box isn't laid out from its root's pivot (tags center over
+        // their car), so this measures what's drawn and moves the root by the difference.
         private void Place()
         {
             RectTransform rect = _callout.RectTransform != null ? _callout.RectTransform : (RectTransform)_callout.transform;
-            rect.pivot = new Vector2(0f, 0f);
-            rect.anchorMin = Vector2.zero;
-            rect.anchorMax = Vector2.zero;
-            Vector2 mouse = _canvas.ScreenToCanvasPosition(Input.mousePosition).XY();
-            Vector2 size = rect.rect.size;
-            Vector2 canvasSize = _canvasRect.sizeDelta;
-            Vector2 position = mouse + new Vector2(12f, 16f);
-            if (position.x + size.x > canvasSize.x)
-                position.x = canvasSize.x - size.x;
-            if (position.y + size.y > canvasSize.y)
-                position.y = canvasSize.y - size.y;
+            Camera camera = _canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : _canvas.worldCamera;
+            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvasRect, Input.mousePosition, camera, out Vector2 mouse))
+                return;
+            if (!TryGetDrawnBounds(out Vector2 min, out Vector2 max))
+                return;
+            Vector2 size = max - min;
+            Rect canvasRect = _canvasRect.rect;
+            Vector2 target = mouse + new Vector2(0f, 16f);
+            target.x = Mathf.Clamp(target.x, canvasRect.xMin, Mathf.Max(canvasRect.xMin, canvasRect.xMax - size.x));
+            target.y = Mathf.Clamp(target.y, canvasRect.yMin, Mathf.Max(canvasRect.yMin, canvasRect.yMax - size.y));
+            Vector2 position = rect.anchoredPosition + (target - min);
             float scale = CanvasSettingsApplicator.EffectiveCanvasScale;
             rect.anchoredPosition = new Vector2(Mathf.Round(position.x * scale) / scale, Mathf.Round(position.y * scale) / scale);
+        }
+
+        private static readonly Vector3[] Corners = new Vector3[4];
+
+        // The box around everything the callout draws, in the canvas's local space.
+        private bool TryGetDrawnBounds(out Vector2 min, out Vector2 max)
+        {
+            min = new Vector2(float.MaxValue, float.MaxValue);
+            max = new Vector2(float.MinValue, float.MinValue);
+            bool any = false;
+            foreach (Graphic graphic in _callout.GetComponentsInChildren<Graphic>())
+            {
+                if (!graphic.enabled)
+                    continue;
+                graphic.rectTransform.GetWorldCorners(Corners);
+                foreach (Vector3 corner in Corners)
+                {
+                    Vector2 local = _canvasRect.InverseTransformPoint(corner);
+                    min = Vector2.Min(min, local);
+                    max = Vector2.Max(max, local);
+                }
+                any = true;
+            }
+            return any;
         }
     }
 }
