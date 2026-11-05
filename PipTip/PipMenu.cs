@@ -31,7 +31,12 @@ namespace PipTip
                 car.SetHandbrake(!car.air.handbrakeApplied);
             });
             if (Consist.TryGetEngineSideNeighbor(cars, index, out Car neighbor))
-                menu.AddButton(ContextMenuQuadrant.Unused2, "Disconnect from Train", () => Consist.Disconnect(car, neighbor));
+                menu.AddButton(ContextMenuQuadrant.Unused2, "Disconnect from Train", () =>
+                {
+                    // Set the handbrake on the cut-off car so it stays put.
+                    car.SetHandbrake(true);
+                    Consist.Disconnect(car, neighbor);
+                });
             List<(Car car, Car neighbor)> engineCuts = Consist.CarsCoupledToEngine(car);
             if (engineCuts.Count > 0)
                 menu.AddButton(ContextMenuQuadrant.Unused2, "Disconnect Cars from Engine", () =>
