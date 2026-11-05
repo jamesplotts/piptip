@@ -1,5 +1,7 @@
 # PipTip
 
+Source: https://github.com/jamesplotts/piptip
+
 A Railroader mod for the 0.6 "Maintenance of Way" built-in mod loader. It works on the row of car pips below the selected engine's name, in the controls panel at the bottom of the screen.
 
 - **Hover a pip** to see that car in a callout styled like the Tab tags, colored by the car's destination. The callout shows:
