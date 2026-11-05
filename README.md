@@ -1,6 +1,7 @@
 # PipTip
 
 Source: https://github.com/jamesplotts/piptip
+Download: https://www.nexusmods.com/railroader/mods/2046 (or the GitHub releases)
 
 A Railroader mod for the 0.6 "Maintenance of Way" built-in mod loader. It works on the row of car pips below the selected engine's name, in the controls panel at the bottom of the screen.
 
